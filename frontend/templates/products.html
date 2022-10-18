@@ -1,13 +1,17 @@
-{% for product in products %}
+{% extends 'main.html' %}
+{% block content %}
+{% for product_inv in products_inv %}
 
 <div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{ product.image }}" alt="Card image cap">
+  <img class="card-img-top" src="{{ product.image }}" alt="Unable to load image">
   <div class="card-body">
-    <h5 class="card-title">{{ product.productname }}</h5>
-    <p class="card-text">{{ product.description }}</p>
-    <p class="card-text">Price - {{ product.price }}</p>
+    <h5 class="card-title">{{ product_inv.product.product_name }}</h5>
+    <p class="card-text">{{ product_inv.product.description }}</p>
+    <p class="card-text">Price - {{ product_inv.product.price }}</p>
+    <p class="card-text">quantity - {{ product_inv.quantity }}</p>
     <a href="#" class="btn btn-primary">Buy Now</a>
   </div>
 </div>
 
 {% endfor %}
+{% endblock %}

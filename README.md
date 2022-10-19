@@ -2,4 +2,4 @@
 LochanDesigns
 =
 
-Built on Django which is a high-level Python web framework 
+Built on Django which is a Python web framework 

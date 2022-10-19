@@ -1,17 +1,23 @@
 {% extends 'main.html' %}
 {% block content %}
-{% for product_inv in products_inv %}
 
-<div class="card" style="width: 18rem;">
-  <img class="card-img-top" src="{{ product.image }}" alt="Unable to load image">
-  <div class="card-body">
-    <h5 class="card-title">{{ product_inv.product.product_name }}</h5>
-    <p class="card-text">{{ product_inv.product.description }}</p>
-    <p class="card-text">Price - {{ product_inv.product.price }}</p>
-    <p class="card-text">quantity - {{ product_inv.quantity }}</p>
-    <a href="#" class="btn btn-primary">Buy Now</a>
+
+<div class="row">
+  {% for product_inv in products_inv %}
+  <div class="col-lg-4">
+    <div class="card border-0">
+      <img class="rounded thumbnail" style="width: 18rem; height: 20rem;" src="{{ product_inv.product.image.url }}" alt="connect">
+      <div class="card-body">
+        <h5 class="card-title">{{ product_inv.product.product_name }}</h5>
+        <p class="card-text">{{ product_inv.product.description }}</p>
+        <p class="card-text">Price - {{ product_inv.product.price }}</p>
+        <p class="card-text">quantity - {{ product_inv.quantity }}</p>
+        <a href="#" class="btn btn-primary">Buy Now</a>
+      </div>
+    </div>
   </div>
+  {% endfor %}
 </div>
 
-{% endfor %}
+
 {% endblock %}

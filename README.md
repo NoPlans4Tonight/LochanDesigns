@@ -2,4 +2,4 @@
 LochanDesigns
 =
 
-Built on Django which is a Python web framework 
+Art Gallery website built on Django which is a Python web framework 

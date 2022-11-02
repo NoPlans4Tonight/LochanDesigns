@@ -1,8 +1,14 @@
 {% extends 'main.html' %}
 
 {% block content %}
-
-    <h1>Welcome to Lochan Designs</h1>
-    <b>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate hic nisi tenetur aspernatur pariatur magnam vero minima fugitnon consequatur vel harum odio dolore nemo aliquid, beatae necessitatibus et. Perferendis.</b>
+{% load static %}
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+<div id="center" class="text-center cover-container">
+    <div class="inner cover">
+        <h1 id="home_h1">Welcome to Lochan Designs</h1>
+        <p id="home_p1">Artist </p>
+        <p id="home_p1" style="font-size:xx-large;">Haley Lochan </p>
+    </div>
+</div>
 
 {% endblock %}

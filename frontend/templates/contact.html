@@ -3,7 +3,8 @@
 
 <style>
     #success {
-          color: #88B04B;
+          /* color: #88B04B; */
+          color: #d3af9c;
           font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
           font-weight: 900;
           font-size: 40px;
@@ -14,11 +15,18 @@
         background: #EBF0F5;
       }
     i {
-        color: #9ABC66;
+        /* color: #9ABC66; */
+        color: #d3af9c;
         font-size: 100px;
         line-height: 200px;
-        margin-left:-15px;
+        margin-left:-5px;
       }
+    label {
+      justify-content: center;
+      font-family: 'Courier New', Courier, monospace;
+      color: #fff;
+      text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+    }
 </style>
 {% if successful_submit %}
     <script type="text/javascript">
@@ -52,7 +60,7 @@
                   <i class="checkmark">✓</i>
                 </div>
                   <h1 id="success">Success</h1> 
-                  <p class="text-white">We received your email request;<br/> we'll be in touch shortly!</p>
+                  <p class="text-black">We received your email request and<br/> we'll be in touch shortly!</p>
                 </div>
         </div>
         <div class="modal-footer">
@@ -71,7 +79,7 @@
         <form class="form-horizontal" align="center" method="post">
             {% csrf_token %}
                 <div>
-                    <label class="label label-default text-light" for="{{ form.first_name.id_for_label }}">First Name</label>
+                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
                     <p>{{ form.first_name }}</p>
                 </div>
                 <div >
@@ -90,5 +98,5 @@
         </form>
     </div>
 </div>
-
+<br>
 {% endblock %}

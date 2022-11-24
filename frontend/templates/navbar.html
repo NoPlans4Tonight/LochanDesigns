@@ -1,4 +1,4 @@
-{% if request.get_full_path == '/' %}
+{% if request.get_full_path == '/' or request.get_full_path == '/contact/' %}
 <nav class="navbar navbar-expand-lg navbar-dark shadow-5-strong">
 {% else %}
 <nav class="navbar navbar-expand-lg navbar-light shadow-5-strong">
@@ -19,7 +19,7 @@
           <a class="nav-link active" aria-current="page" href="{% url 'products' %}">Gallery</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Contact Us</a>
+          <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact Us</a>
         </li>
       </ul>
     </div>

@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-#vc-)7_ek^)i+fb!q+4rbh0jydd#5(mk8e4acp_(xg$)9y$1yg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
+ALLOWED_HOSTS = ['0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
 
 
 # Application definition
@@ -56,8 +56,12 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_SSL_REDIRECT = True
+if (os.environ.get("APP_ENV") == "local"):
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = False
+else:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
 
 ROOT_URLCONF = 'LochanDesigns.urls'
 

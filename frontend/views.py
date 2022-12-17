@@ -1,13 +1,17 @@
 from django.shortcuts import render, redirect
 from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail, BadHeaderError
+from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .forms import ContactForm
 from .models import *
 
 def products(request):
-    products_inv = ProductInventory.objects.all
-    return render(request, 'products.html', {'products_inv':products_inv})
+	p = Paginator(ProductInventory.objects.all(), 6)
+	page = request.GET.get('page')
+	products = p.get_page(page)
+
+	return render(request, 'products.html', {'page_obj': products})
 
 def home_page(request):
     return render(request, 'home.html')

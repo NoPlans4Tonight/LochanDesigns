@@ -25,7 +25,7 @@
     <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
     <title>Lochan Designs</title>
 </head>
-{% if request.get_full_path != '/products/' %}
+{% if request.path != '/products/' %}
 <div class="bg">
 {% else %}
 <div>
@@ -38,7 +38,10 @@
         {% endblock %}
     </div>
 </div>
+{% if request.get_full_path == '/' %}
 <footer id="footer" class="navbar-static-bottom text-center navbar-light text-lg-start">
     {% include 'footer.html' %}
 </footer>
+{% else %}
+{% endif %}
 </html>

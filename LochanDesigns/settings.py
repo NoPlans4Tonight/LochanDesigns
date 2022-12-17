@@ -29,7 +29,10 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get("SECRET_PW")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if (os.environ.get("APP_ENV") == "local"):
+    DEBUG = True
+else:
+    DEBUG = False
 
 ALLOWED_HOSTS = ['0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
 

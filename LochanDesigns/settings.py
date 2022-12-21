@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get("SECRET_PW")
 # else:
 #     DEBUG = False
 
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
 
@@ -65,11 +65,9 @@ MIDDLEWARE = [
 if (os.environ.get("APP_ENV") == "local"):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = False
-    DEBUG = True
 else:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
-    DEBUG = False
 
 ROOT_URLCONF = 'LochanDesigns.urls'
 

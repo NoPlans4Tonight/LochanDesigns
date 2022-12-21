@@ -1,0 +1,112 @@
+{% extends 'main.html' %}
+{% block content %}
+
+<style>
+  .errorlist {
+    color: #ba3939;
+    background: #ffe0e0;
+    border: 0px solid #a33a3a;
+  }
+  #success {
+    /* color: #88B04B; */
+    color: #d3af9c;
+    font-family: "Nunito Sans", "Helvetica Neue", sans-serif;
+    font-weight: 900;
+    font-size: 40px;
+    margin-bottom: 10px;
+  }
+  body {
+    text-align: center;
+    background: #EBF0F5;
+  }
+  i {
+    /* color: #9ABC66; */
+    color: #d3af9c;
+    font-size: 100px;
+    line-height: 200px;
+    margin-left:-5px;
+  }
+  label {
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #fff;
+    text-shadow: 0 .05rem .1rem rgba(0, 0, 0, .5);
+  }
+
+</style>
+{% if successful_submit %}
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $("#exampleModal").modal('show');
+            $('#id_first_name').val("");
+            $('#id_last_name').val("");
+            $('#id_email_address').val("");
+            $('#id_message').val("");
+        });
+    </script>
+{% endif %}
+<script type="text/javascript">
+    $(document).ready(function(){
+        console.log("hello world");
+    });
+</script>
+
+<p>{{ form.errors }}</p>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Message Sent Succesfully!</h5>
+          <button type="button" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="card-transparent">
+                <div style="border-radius:200px; height:200px; width:200px; background: #F8FAF5; margin:0 auto;">
+                  <i class="checkmark">✓</i>
+                </div>
+                  <h1 id="success">Success</h1> 
+                  <p class="text-black">We received your email request and<br/> we'll be in touch shortly!</p>
+                </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<h1>Contact</h1>
+<p id="home_p1">
+    Please submit the form below for purchase or custom inquiries!
+</p>
+<div class="container col-lg-12 block">
+    <div class="row col-xs-6 block2 center">
+        <form class="form-horizontal" align="center" method="post">
+            {% csrf_token %}
+                <div>
+                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
+                    <p>{{ form.first_name }}</p>
+                </div>
+                <div >
+                    <label class="label label-default text-light" for="{{ form.last_name.id_for_label }}">Last Name</label>
+                    <p>{{ form.last_name }}</p>
+                </div>
+                <div>
+                    <label class="label label-default text-light" for="{{ form.email_address.id_for_label }}">Email Address</label>
+                    <p>{{ form.email_address }}</p>
+                </div>
+                <div>
+                    <label class="label label-default text-light" for="{{ form.message.id_for_label }}">Message</label>
+                    <p>{{ form.message }}</p>
+                </div>
+                <div>
+                  <p>{{ form.botcatcher }}</p>
+                </div>
+                <button class="btn btn-secondary" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<br>
+{% endblock %}

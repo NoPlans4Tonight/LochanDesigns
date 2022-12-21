@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .forms import ContactForm
 from .models import *
+from storage.models import Storage
 
 def products(request):
 	p = Paginator(ProductInventory.objects.all(), 6)
@@ -14,7 +15,9 @@ def products(request):
 	return render(request, 'products.html', {'page_obj': products})
 
 def home_page(request):
-    return render(request, 'home.html')
+	storageRecord = Storage.objects.filter(product_name='Background')
+	bg = storageRecord
+	return render(request, 'main.html', {'bg':bg})
 
 def contact_page(request):
 	if request.method == 'POST':

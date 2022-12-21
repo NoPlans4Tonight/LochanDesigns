@@ -4,6 +4,12 @@
 {% else %}
 <nav class="navbar navbar-expand-lg navbar-light shadow-5-strong">
 {% endif %}
+<style>
+  #hello {
+    font-size: 18px;
+    margin-right: 20px
+  }
+</style>
   <div class="container-fluid">
     {% load static %}
     <!-- <a id="logo" class="navbar-brand" href="{% url 'home' %}">LochanDesigns Gallery</a><img class="rounded" id="logo" src="{% static '/logo.png' %}" height="32" alt="Logo"></a> -->
@@ -13,6 +19,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" id="hello" aria-current="page">Hello, {{ request.user }}</a>
+        </li>
+        {% else %}
+        {% endif %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home</a>
         </li>
@@ -22,6 +34,15 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'contact' %}">Contact Us</a>
         </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Log Out</a>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'login' %}">Login</a>
+        </li>
+        {% endif %}
       </ul>
     </div>
   </div>

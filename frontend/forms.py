@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django.core import validators
 
 class ContactForm(forms.Form):
@@ -9,4 +11,8 @@ class ContactForm(forms.Form):
 	botcatcher = forms.CharField(required=False,
 								widget=forms.HiddenInput,
 								validators=[validators.MaxLengthValidator(0)])
-	
+
+class CreateUserForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'email', 'password1']

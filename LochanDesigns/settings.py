@@ -34,7 +34,7 @@ SECRET_KEY = os.environ.get("SECRET_PW")
 # else:
 #     DEBUG = False
 
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
 

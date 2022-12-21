@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.http import HttpResponse
 from .forms import ContactForm
 from .models import *
+from storage.models import Storage
 
 def products(request):
 	p = Paginator(ProductInventory.objects.all(), 6)
@@ -14,9 +15,13 @@ def products(request):
 	return render(request, 'products.html', {'page_obj': products})
 
 def home_page(request):
-    return render(request, 'home.html')
+	storageRecord = Storage.objects.filter(product_name='Background')
+	bg = storageRecord
+	return render(request, 'main.html', {'bg':bg})
 
 def contact_page(request):
+	storageRecord = Storage.objects.filter(product_name='Background')
+	bg = storageRecord
 	if request.method == 'POST':
 		form = ContactForm(request.POST)
 		if form.is_valid():
@@ -32,9 +37,9 @@ def contact_page(request):
 				send_mail(subject, message, 'haley@lochandesigns.com', ['haley@lochandesigns.com', 'jlochan53@gmail.com'])
 			except BadHeaderError:
 				return HttpResponse('Invalid header found.')
-			return render(request, "contact.html",{'form':form, 'successful_submit': True})
+			return render(request, "contact.html",{'form':form, 'successful_submit': True, 'bg': bg})
 		else:
-			return render(request, "contact.html", {'form':form})
+			return render(request, "contact.html", {'form':form, 'bg': bg})
 
 	form = ContactForm()
-	return render(request, "contact.html", {'form':form})
+	return render(request, "contact.html", {'form':form, 'bg': bg})

@@ -34,9 +34,9 @@ SECRET_KEY = os.environ.get("SECRET_PW")
 # else:
 #     DEBUG = False
 
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
+ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
 
 
 # Application definition
@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'frontend',
+    'storage',
 ]
 
 MIDDLEWARE = [
@@ -64,9 +65,11 @@ MIDDLEWARE = [
 if (os.environ.get("APP_ENV") == "local"):
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = False
+    DEBUG = True
 else:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
     SECURE_SSL_REDIRECT = True
+    DEBUG = False
 
 ROOT_URLCONF = 'LochanDesigns.urls'
 
@@ -161,3 +164,10 @@ EMAIL_HOST_USER = 'haley@lochandesigns.com'
 EMAIL_HOST_PASSWORD = os.environ.get("GMAIL_USER_PASSWORD", 'defaultVal')
 DEFAULT_FROM_EMAIL = 'haley@lochandesigns.com'
 EMAIL_USE_TLS = True
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_ACCESS_KEY_ID= os.environ.get("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY= os.environ.get("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME= os.environ.get("AWS_STORAGE_BUCKET_NAME")
+AWS_QUERYSTRING_AUTH=False

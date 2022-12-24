@@ -5,10 +5,10 @@
 <nav class="navbar navbar-expand-lg navbar-light shadow-5-strong">
 {% endif %}
 <style>
-  #hello {
+  /* #hello {
     font-size: 18px;
     margin-right: 20px
-  }
+  } */
 </style>
   <div class="container-fluid">
     {% load static %}
@@ -22,6 +22,18 @@
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link active" id="hello" aria-current="page">Hello, {{ request.user }}</a>
+        </li>
+        {% else %}
+        {% endif %}
+        {% if request.user.is_superuser %}
+        <li class="nav-item dropdown">
+          <a class="nav-link active dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Maintenance
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'storage:upload' %}">Upload Photo</a></li>
+            <li><a class="dropdown-item" href="{% url 'storage:edit' %}">Edit Gallery</a></li>
+          </ul>
         </li>
         {% else %}
         {% endif %}

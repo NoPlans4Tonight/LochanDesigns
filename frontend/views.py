@@ -3,7 +3,6 @@ from django.shortcuts import get_object_or_404
 from django.core.mail import send_mail, BadHeaderError
 from django.core.paginator import Paginator
 from django.http import HttpResponse
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .forms import ContactForm, CreateUserForm

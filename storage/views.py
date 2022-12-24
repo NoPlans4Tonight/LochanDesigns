@@ -1,8 +1,8 @@
 from django.http import HttpResponse
-from django.contrib import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from django.core.paginator import Paginator
 from django.core.files import File
+from .forms import GalleryUploadForm
 from .forms import GalleryUploadForm
 from storage.models import *
 from PIL import Image
@@ -80,3 +80,18 @@ def resize_image(image):
     size = os.path.getsize(temp_image.name)
     
     return temp_image, size
+def edit_products(request):
+	return render(request, 'maintenance/maintenance.html')
+
+def upload_product(request):
+	if request.method == 'POST':
+		form = GalleryUploadForm(request.POST, request.FILES)
+
+		if form.is_valid():
+			form.save()
+			return HttpResponse('successfully uploaded')
+	else:
+		form = GalleryUploadForm()
+
+	form = GalleryUploadForm()
+	return render(request, 'maintenance/upload.html', {"form": form})

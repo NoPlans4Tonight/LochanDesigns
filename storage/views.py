@@ -1,7 +1,9 @@
 from django.http import HttpResponse
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.core.paginator import Paginator
+>>>>>>> 04bd7a8 (upload photo form created (#13))
+from .forms import GalleryUploadForm
+from .forms import GalleryUploadForm
 from .forms import GalleryUploadForm
 from storage.models import *
 from PIL import Image
@@ -33,3 +35,94 @@ def upload_product(request):
 
 	form = GalleryUploadForm()
 	return render(request, 'maintenance/upload.html', {"form": form})
+def edit_products(request):
+	return render(request, 'maintenance/maintenance.html')
+
+def upload_product(request):
+	if request.method == 'POST':
+		form = GalleryUploadForm(request.POST, request.FILES)
+
+		if form.is_valid():
+			form.save()
+			return HttpResponse('successfully uploaded')
+	else:
+		form = GalleryUploadForm()
+
+	form = GalleryUploadForm()
+	return render(request, 'maintenance/upload.html', {"form": form})
+def edit_products(request):
+	return render(request, 'maintenance/maintenance.html')
+
+<<<<<<< HEAD
+# def upload_product(request):
+# 	if request.method == 'POST':
+# 		form = GalleryUploadForm(request.POST, request.FILES)
+# 		if request.FILES is not None:
+# 			if form.is_valid():
+# 				form.save()
+# 				return redirect('/products')
+# 	else:
+# 		messages.info(request, 'Something went wrong')
+# 		form = GalleryUploadForm()
+
+# 	form = GalleryUploadForm()
+# 	return render(request, 'maintenance/upload.html', {"form": form})
+
+def upload_product(request):
+    if request.method == 'POST':
+        form = GalleryUploadForm(request.POST, request.FILES)
+        if request.FILES:
+            if form.is_valid():
+                product = form.save(commit=False)  # Save the form data temporarily
+                
+                # Resize the image if necessary
+                image = form.cleaned_data['image']
+                if image.size > 1000000:
+                    resized_image, size = resize_image(image)
+                    
+                    # Check if the resized image size is within the limit
+                    if size <= 1000000:
+                        # Save the resized image to product.image field
+                        product.image.save(image.name, File(resized_image))
+                    else:
+                        # Image cannot be resized to the required size
+                        messages.error(request, 'The image size is too large')
+                        return redirect('/products')  # or handle the error appropriately
+                
+                product.save()  # Save the product model with the resized image
+                return redirect('/products')
+    else:
+        messages.error(request, 'Something went wrong')
+    
+    form = GalleryUploadForm()
+    return render(request, 'maintenance/upload.html', {"form": form})
+
+def resize_image(image):
+    # Open the image
+    img = Image.open(image)
+    
+    # Resize the image
+    resized_img = resizeimage.resize_cover(img, [800, 800])
+    
+    # Create a temporary file to save the resized image
+    temp_image = tempfile.NamedTemporaryFile(delete=True)
+    resized_img.save(temp_image.name, img.format)
+    
+    # Get the size of the resized image
+    size = os.path.getsize(temp_image.name)
+    
+    return temp_image, size
+=======
+def upload_product(request):
+	if request.method == 'POST':
+		form = GalleryUploadForm(request.POST, request.FILES)
+
+		if form.is_valid():
+			form.save()
+			return HttpResponse('successfully uploaded')
+	else:
+		form = GalleryUploadForm()
+
+	form = GalleryUploadForm()
+	return render(request, 'maintenance/upload.html', {"form": form})
+>>>>>>> 04bd7a8 (upload photo form created (#13))

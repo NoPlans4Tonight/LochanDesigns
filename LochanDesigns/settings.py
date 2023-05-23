@@ -29,12 +29,12 @@ load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ.get("SECRET_PW")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# if (os.environ.get("APP_ENV") == "local"):
-#     DEBUG = True
-# else:
-#     DEBUG = False
+if (os.environ.get("APP_ENV") == "local"):
+    DEBUG = True
+else:
+    DEBUG = False
 
-DEBUG = False
+# DEBUG = True
 
 ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'lochandesign.herokuapp.com', 'www.lochandesigns.com']
 
@@ -42,6 +42,8 @@ ALLOWED_HOSTS = ['localhost', '0.0.0.0', 'lochandesign.herokuapp.com', 'www.loch
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
+    "crispy_bootstrap5",
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -129,6 +131,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# Crispy Forms settings
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/

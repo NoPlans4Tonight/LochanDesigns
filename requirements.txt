@@ -1,7 +1,7 @@
 asgiref==3.6.0
 boto3==1.26.33
 botocore==1.29.33
-certifi==2021.10.8
+certifi==2022.12.7
 charset-normalizer==2.1.1
 crispy-bootstrap5==0.7
 dj-database-url==1.2.0

@@ -17,7 +17,8 @@ def products(request):
 	return render(request, 'products.html', {'page_obj': products})
 
 def home_page(request):
-	storageRecord = Storage.objects.filter(product_name='Background')
+	# storageRecord = Storage.objects.filter(product_name='Background')
+	storageRecord = Storage.objects.order_by('?')[:1]
 	bg = storageRecord
 	return render(request, 'main.html', {'bg':bg})
 

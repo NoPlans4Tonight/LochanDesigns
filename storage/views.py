@@ -22,20 +22,6 @@ def products(request):
 def edit_products(request):
 	return render(request, 'maintenance/maintenance.html')
 
-# def upload_product(request):
-# 	if request.method == 'POST':
-# 		form = GalleryUploadForm(request.POST, request.FILES)
-# 		if request.FILES is not None:
-# 			if form.is_valid():
-# 				form.save()
-# 				return redirect('/products')
-# 	else:
-# 		messages.info(request, 'Something went wrong')
-# 		form = GalleryUploadForm()
-
-# 	form = GalleryUploadForm()
-# 	return render(request, 'maintenance/upload.html', {"form": form})
-
 def upload_product(request):
     if request.method == 'POST':
         form = GalleryUploadForm(request.POST, request.FILES)

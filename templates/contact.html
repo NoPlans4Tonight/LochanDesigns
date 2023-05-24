@@ -1,6 +1,6 @@
 {% extends 'main.html' %}
 {% block content %}
-
+{% load crispy_forms_tags %}
 <style>
   .errorlist {
     color: #ba3939;
@@ -83,28 +83,9 @@
 </p>
 <div class="container col-lg-12 block">
     <div class="row col-xs-6 block2 center">
-        <form class="form-horizontal" align="center" method="post">
+        <form class="form-horizontal" align="center" enctype="multipart/form-data" method="post">
             {% csrf_token %}
-                <div>
-                    <label for="{{ form.first_name.id_for_label }}">First Name</label>
-                    <p>{{ form.first_name }}</p>
-                </div>
-                <div >
-                    <label class="label label-default text-light" for="{{ form.last_name.id_for_label }}">Last Name</label>
-                    <p>{{ form.last_name }}</p>
-                </div>
-                <div>
-                    <label class="label label-default text-light" for="{{ form.email_address.id_for_label }}">Email Address</label>
-                    <p>{{ form.email_address }}</p>
-                </div>
-                <div>
-                    <label class="label label-default text-light" for="{{ form.message.id_for_label }}">Message</label>
-                    <p>{{ form.message }}</p>
-                </div>
-                <div>
-                  <p>{{ form.botcatcher }}</p>
-                </div>
-                <button class="btn btn-secondary" type="submit">Submit</button>
+            {% crispy form %}
         </form>
     </div>
 </div>

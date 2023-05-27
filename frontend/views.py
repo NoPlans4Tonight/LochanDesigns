@@ -9,15 +9,7 @@ from .forms import ContactForm, CreateUserForm
 from .models import *
 from storage.models import Storage
 
-def products(request):
-	p = Paginator(ProductInventory.objects.all(), 6)
-	page = request.GET.get('page')
-	products = p.get_page(page)
-
-	return render(request, 'products.html', {'page_obj': products})
-
 def home_page(request):
-	# storageRecord = Storage.objects.filter(product_name='Background')
 	storageRecord = Storage.objects.order_by('?')[:1]
 	bg = storageRecord
 	return render(request, 'main.html', {'bg':bg})

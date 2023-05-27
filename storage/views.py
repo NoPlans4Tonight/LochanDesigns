@@ -1,9 +1,10 @@
 from django.http import HttpResponse
 from django.contrib import messages
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.core.paginator import Paginator
 from django.core.files import File
-from .forms import GalleryUploadForm
+from .forms import GalleryUploadForm, EditRecordForm
 from storage.models import *
 from PIL import Image
 from resizeimage import resizeimage
@@ -20,7 +21,28 @@ def products(request):
 	return render(request, 'products.html', {'page_obj': products})
 
 def edit_products(request):
-	return render(request, 'maintenance/maintenance.html')
+    storage_records = Storage.objects.all()
+    return render(request, 'maintenance/maintenance.html', {'storage_records': storage_records})
+
+def edit_record(request, record_id):
+    record = Storage.objects.get(id=record_id)
+    if request.method == 'POST':
+        # Process the updated form data and save it
+        form = EditRecordForm(request.POST, instance=record)
+        if form.is_valid():
+            form.save()
+            # return redirect(f'/products/edit-record/{record_id}/')
+            return redirect(reverse('storage:edit'))
+    else:
+        # Render the form with the current record data
+        form = EditRecordForm(instance=record)
+    
+    return render(request, 'maintenance/edit_record.html', {'form': form, 'record': record})
+
+def delete_record(request, record_id):
+    record = Storage.objects.get(id=record_id)
+    record.delete()
+    return redirect(reverse('storage:edit'))
 
 def upload_product(request):
     if request.method == 'POST':

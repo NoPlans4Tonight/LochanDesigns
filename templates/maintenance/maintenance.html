@@ -1,2 +1,22 @@
 {% extends 'main.html' %}
+{% block content %}
 <h3>Edit Gallery</h3>
+
+<!-- Products -->
+<div class="row">
+  {% for product_inv in storage_records %}
+  <div class="col-lg-4">
+    <div class="card border-0">
+      <a href="{% url 'storage:edit_record' product_inv.id %}">
+        <img class="rounded thumbnail mx-auto" style="width: 18rem; height: 20rem;" src="{{ product_inv.image.url }}" alt="connect">
+      </a>
+      <div class="card-body mx-auto">
+        <h5 class="card-title">{{ product_inv.product_name }}</h5>
+        <a href="{% url 'storage:edit_record' product_inv.id %}" class="btn btn-primary">Edit</a>
+        <a href="{% url 'storage:delete_record' product_inv.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
